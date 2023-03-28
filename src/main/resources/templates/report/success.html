@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+	.success {
+		text-align: center;
+	}
+</style>
+<body>
+	<div th:include="common/header.html"></div>
+	<div class="success">
+		<br>
+		<img src="/images/error2.png" style="width:100px;">
+		<h1 th:text="${successMessage}"></h1>
+		<h4> 빠른 시일 내에 관리자 확인 후 '<span th:text="${nickname}" style="color:cadetblue"></span>'님에 대한 적절한 조치를 검토하겠습니다.</h4>
+		<h4>감사합니다 :)</h4>
+	</div>
+	<div th:include="common/footer.html"></div>
+</body>
+</html>

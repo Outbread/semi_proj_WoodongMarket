@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="/css/reportList.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	<h3 align="center">신고 내역</h3>
+	
+	<div id="reportList">
+		<table align="center" border="1" class="reportTable">
+			<tr>
+				<th>No.</th>
+				<th>신고 사유</th>
+				<th>신고 제목</th>
+				<th>신고 내용</th>
+				<th>회원코드</th>
+				<th>아이디</th>
+				<th>닉네임</th>
+				<th>활성화 여부</th>
+				<th>비활성화</th>
+				<th>신고 코드</th>
+				<th>처리상태</th>
+			</tr>
+
+			<tr th:each="report : ${reportList}">
+				<td th:text="${reportStat.count}"></td>
+
+				<th:bock th:switch="${report.reportReason}">
+					<td th:case="'사기' + ' ' + '당했어요'">사기</td>
+					<td th:case="'비매너' + ' ' + '사용자예요'">비매너</td>
+					<td th:case="'욕설을' + ' ' + '해요'">욕설</td>
+					<td th:case="'다른' + ' ' + '문제가' + ' ' + '있어요'">기타</td>
+					</th:block>
+					<td class="title"><a class="t" th:href="'/report/detail/'+${report.reportCode}"
+							th:text="${report.reportTitle}"></a></td>
+					<td>
+						<div class="content" th:text="${report.reportContent}"></div>
+					</td>
+					<td th:text="${report.memberCode.memberCode}" class="code"></td>
+					<td th:text="${report.memberCode.memberId}"></td>
+					<td th:text="${report.memberCode.nickname}"></td>
+					<th:bock th:switch="${report.memberCode.activeYn}">
+						<td th:case="Y" class="active">Y</td>
+						<td th:case="N" class="red active">N</td>
+						</th:block>
+						<th:bock th:switch="${report.memberCode.activeYn}">
+							<td th:case="Y"><button onclick="ban(this)">비활성화</button></td>
+							<td th:case="N"><button onclick="ban(this)">활성화</button></td>
+							</th:block>
+							<td th:text="${report.reportCode}" class="code"></td>
+
+							<td class="blue"><input type="checkbox" th:text="${report.reportStatus}"
+									th:value="${report.reportStatus}" onclick="done(this)"></input></td>
+			</tr>
+
+		</table>
+
+		<h3 align="center">처리 완료된 신고</h3>
+
+		<table align="center" border="1" class="reportTable">
+			<tr>
+				<th>No.</th>
+				<th>신고 사유</th>
+				<th>신고 제목</th>
+				<th>신고 내용</th>
+				<th>회원코드</th>
+				<th>아이디</th>
+				<th>닉네임</th>
+				<th>활성화 여부</th>
+				<th>비활성화</th>
+				<th>신고 코드</th>
+				<th>처리상태</th>
+			</tr>
+
+			<tr th:each="report : ${doneList}" class="grey">
+				<td th:text="${reportStat.count}"></td>
+
+				<th:bock th:switch="${report.reportReason}">
+					<td th:case="'사기' + ' ' + '당했어요'">사기</td>
+					<td th:case="'비매너' + ' ' + '사용자예요'">비매너</td>
+					<td th:case="'욕설을' + ' ' + '해요'">욕설</td>
+					<td th:case="'다른' + ' ' + '문제가' + ' ' + '있어요'">기타</td>
+					</th:block>
+					<td class="title"><a class="t" th:href="'/report/detail/'+${report.reportCode}"
+							th:text="${report.reportTitle}"></a></td>
+					<td>
+						<div class="content" th:text="${report.reportContent}"></div>
+					</td>
+					<td th:text="${report.memberCode.memberCode}" class="code"></td>
+					<td th:text="${report.memberCode.memberId}"></td>
+					<td th:text="${report.memberCode.nickname}"></td>
+					<th:bock th:switch="${report.memberCode.activeYn}">
+						<td th:case="Y" class="active">Y</td>
+						<td th:case="N" class="red active">N</td>
+						</th:block>
+						<th:bock th:switch="${report.memberCode.activeYn}">
+							<td th:case="Y"><button onclick="ban(this)">비활성화</button></td>
+							<td th:case="N"><button onclick="ban(this)">활성화</button></td>
+							</th:block>
+							<td th:text="${report.reportCode}" class="code"></td>
+
+							<td><input type="checkbox" th:text="${report.reportStatus}"
+									th:value="${report.reportStatus}" onclick="done(this)"></input></td>
+			</tr>
+
+		</table>
+	</div>
+	<div th:include="common/footer.html"></div>
+</body>
+<script type="text/javascript">
+
+	function ban(btn) {
+
+		console.log(btn.parentNode.previousElementSibling.innerText);
+
+		if (btn.parentNode.previousElementSibling.innerText === "Y") {
+
+			$.ajax({
+				url: "ban",
+				method: "get",
+				data: {
+					memberCode: btn.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText
+				},
+				success: function (data) {
+					console.log(data);
+					location.href = "/admin/reportList";
+				},
+				error: function (error) {
+					console.log(error);
+					console.log(btn.parentNode.nextElementSibling.innerText);
+					return false;
+				}
+			});
+
+		} else if (btn.parentNode.previousElementSibling.innerText === "N") {
+
+			$.ajax({
+				url: "activate",
+				method: "get",
+				data: {
+					memberCode: btn.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText
+				},
+				success: function (data) {
+					console.log(data);
+					location.href = "/admin/reportList";
+				},
+				error: function (error) {
+					console.log(error);
+					return false;
+				}
+			});
+
+		}
+	};
+
+	function done(check) {
+
+		const $reportCode = check.parentNode.previousElementSibling.innerText;
+		console.log(check.value);
+
+		if (check.value === "확인중") {
+
+			$.ajax({
+				url: "done",
+				method: "get",
+				data: {
+					reportCode: $reportCode
+				},
+				success: function (data) {
+					console.log(data);
+					location.href = "/admin/reportList";
+				},
+				error: function (error) {
+					console.log(error);
+					return false;
+				}
+			});
+		} else if (check.value === "완료") {
+			$.ajax({
+				url: "preparing",
+				method: "get",
+				data: {
+					reportCode: $reportCode
+				},
+				success: function (data) {
+					console.log(data);
+					location.href = "/admin/reportList";
+				},
+				error: function (error) {
+					console.log(error);
+					return false;
+				}
+			});
+		}
+	}
+
+</script>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script th:inline="javascript">
+		console.log('[[${tradeMap["23"][0].trTitle}]]');
+	</script>
+	<div th:replace="common/header.html"></div>
+	<h3 align="center">받은 교환 요청들</h3>
+	<table align="center" border="1">
+		<tr>
+			<th>받은 요청</th>
+			<th>신청자</th>
+			<th>받은 날</th>
+			<th>내가 올린 상품</th>
+		</tr>
+		
+		<tr th:each="trade : ${tradeMap}">
+			<th:block th:each="eachTrade : ${trade.value}">
+				<td th:text="${eachTrade.trTitle}"></td>
+				<td th:text="${eachTrade.memberCode}"></td>
+				<td th:text="${eachTrade.trDate}"></td>
+				<th:block th:each="post : ${postList}">
+					<th:block th:if="${post.postCode eq eachTrade.postCode}">
+						<td th:text="${post.productName}"></td>
+					</th:block>
+				</th:block>
+			</th:block>
+		</tr>
+		
+		<!-- <tr th:each="post : ${ postList }">
+			<td th:text='${tradeMap.key}'></td>
+			<td><a th:text="${ post?.productName }" ></a></td>
+			
+    		<td th:text="${trade}"></td>
+    		<td th:text='${trade.value}'></td>
+			<td th:text="${post?.productName}"></td>
+		</tr> -->
+		<!--<tr th:each="trade : ${ tradeList }">
+			<td th:text="${trade?.trTitle}"></td>
+			
+			<td><a th:text="${ post?.trTitle }" href="/trade/detail"></a></td>
+			 <td th:text="${ post?.memberCode?.nickname }"></td>
+			<td th:text="${ post?.trDate }"></td>
+			<tr th:each="trade : ${ tradeList }">
+			<td th:text="${trade?.memberCode?.nickname}"></td>
+			<td th:text="${trade?.trDate}"></td>
+		</tr> -->
+	</table>
+	<div th:include="common/footer.html"></div>
+</body>
+</html>

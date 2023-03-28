@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:include="common/header.html"></div>
+	<form action="/post/detail" method="post" align="center">
+		<tr th:each="post: ${ postAllListClothes }">
+			<td><a th:href="'/post/'+${post.postCode}" th:text="${ post.productName }"></a></td>
+			<td th:text="${ post.price }"></td>
+			<td th:text="${ post.viewCount }"></td>
+			<br>
+		</tr>
+	</form>
+	<div th:include="common/footer.html"></div>
+	
+	
+	<!-- <script type="text/javascript">
+	/* 	$("#location1").click(function(){
+ 		$.ajax({
+ 			url:"location1", 
+ 			type:"post",
+			data: {         // JS의 객체를 실어보냄(쿼리스트링으로 해석 됨)
+				name: '피카추', 
+				age: 2
+			},
+ 			
+ 			success: function(data1){
+ 				const data = JSON.parse(data1);
+ 			
+ 			success: function(data){
+ 				console.log(data);
+ 				console.table(data);
+ 				
+ 				이후는 테이블 id만 바꿔서 첫번째 예제의 DOM 추가하는 부분 복붙해서 확인하자
+ 			},
+ 				error: function(error){
+ 				console.log(error);
+ 				}
+ 		});
+ 	}); 
+	
+		$(function(){
+			console.table(JSON.parse('[(${jsonPostAllListClothes})]'));
+			let clothesArr = JSON.parse('[(${jsonPostAllListClothes})]');
+			console.log(clothesArr[0]);
+		 	if(clothesArr[1].location == "목동"){
+				for(console.log(clothesArr[n]){
+					
+				}; 
+	
+			
+		 $.ajax({
+				url: "/post/location/list",                                     // 요 url 주소에 
+				success: function(data){
+					const $location = $("#location1");                     
+					$location.html("");											// html파일을 만들거야 
+					
+					for (let index in data){                                    // 근데 for문 돌려서 저 배열에 담긴 값들을 하나씩 화면에 뿌려줄거야 
+						$location.append($("<button>").text(data[index].clothesArr));  // 요길 어떻게 써야될지 모르겠음 각 버튼에 location1, 2, 3 이렇게 id를 각각설정해서 
+					}																//각각 반환한값을 담아줘야하는거겠지?
+				},
+				error: function(xhr){
+					console.log(xhr);
+				}
+			}); 
+		}); */
+	</script> -->
+	
+</body>
+</html>

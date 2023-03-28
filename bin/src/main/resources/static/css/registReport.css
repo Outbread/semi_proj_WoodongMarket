@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h3 {
+	font-family: 'Cafe24SsurroundAir';
+}
+label {
+	font-family: 'Cafe24SsurroundAir';
+	font-weight: bolder;
+}
+img {
+	 width:50px;
+}
+.color {
+	 color:cadetblue;
+}
+.reportTable {
+	width: 780px;
+	padding: 30px;
+	border-radius: 20px;
+	background-color: rgba(217, 217, 217, 1);
+	margin-bottom: 20px;
+}
+.title {
+	width: 600px;
+	height: 30px;
+	padding: 10px;
+}
+.left {
+	width: 120px;
+	text-align: center;
+	padding: 10px;
+}
+.content {
+	width: 590px;
+	height: 200px;
+	padding: 15px;
+	margin-top: 20px;
+}
+.top {
+	margin-top: 20px;
+}
+.reason {
+	display: flex;
+	width: 240px;
+	height: 25px;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(223, 228, 237, 1);
+	margin-bottom: 20px;
+	padding: 10px;
+	border-radius: 20px;
+	color: rgb(192, 192, 192);
+}
+.oneLine {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.textBox {position:relative;}
+.count {position:absolute; right:20px; bottom:20px; color:#666;}
+.opacity {
+	opacity:0;
+}
+.opacity:checked + label {
+	background-color: rgba(98, 112, 138, 1);
+	color: white;
+}

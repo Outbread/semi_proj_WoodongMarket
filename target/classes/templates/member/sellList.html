@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:include="common/header.html"></div>
+	<h1>판매 목록</h1>
+	<table align="center" border="1" class="sellTable">
+		<tr>
+			<th>No.</th>
+			<th>상품번호</th>
+			<th>판매자 번호</th>
+			<th>카테고리</th>
+			<th>교환 가능</th>
+			<th>네고 가능</th>
+			<th>거래지역</th>
+			<th>상품명</th>
+			<th>내용</th>
+			<th>가격</th>
+			<th>수량</th>
+			<th>올린 날짜</th>
+			<th>판매 완료</th>
+		</tr>
+
+		<tr th:each="sell : ${sellList}">
+
+			<td th:text="${sellStat.count}"></td>
+			<td th:text="${sell.postCode}"></td>
+			<td th:text="${sell.sellerCode}"></td>
+			<td>
+				<th:block th:switch="${sell.categoryCode}">
+			        <span th:case="1">의류</span>
+			        <span th:case="2">전자기기</span>
+			        <span th:case="3">문화</span>
+			        <span th:case="4">미용잡화</span>
+			        <span th:case="5">가구</span>
+			    </th:block>
+		    </td>
+			<td th:text="${sell.tradeableYn}"></td>
+			<td th:text="${sell.discountYn}"></td>
+			<td th:text="${sell.location}"></td>
+			<td th:text="${sell.productName}"></td>
+			<td th:text="${sell.productContent}"></td>
+			<td th:text="${sell.price}"></td>
+			<td th:text="${sell.productTotal}"></td>
+			<td th:text="${sell.uploadDate}"></td>
+			<td>
+				<th:bock th:switch="${sell.orderableYn}">
+					<span th:case="Y" class="orderalbe">Y</span>
+					<span th:case="N" class="selled">N</span>
+				</th:block>
+			</td>
+			<td>
+				<button onclick="orderable(this);">완료</button>
+			</td>
+		</tr>
+
+	</table>
+	<div th:include="common/footer.html"></div>
+	
+	<script type="text/javascript">
+   
+   function orderable(btn) {
+      
+      if(btn.parentNode.previousElementSibling.innerText === "Y") {
+         
+         $.ajax({
+               url: "orderableN",
+               method: "get",
+               data: {
+               		postCode: btn.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText
+            },
+               success: function(data) {
+               console.log(data);
+               console.log("성공");
+               location.href="/member/sellList";
+               },
+               error: function(error) {
+                   console.log(error);
+                   console.log("실패");
+                   console.log(btn.parentNode.nextElementSibling.innerText);
+                   return false;
+               }
+            });
+         
+      } else if(btn.parentNode.previousElementSibling.innerText === "N"){
+
+         $.ajax({
+               url: "orderableY",
+               method: "get",
+               data: {
+			   		postCode: btn.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText
+			            },
+               success: function(data) {
+               console.log(data);
+               location.href="/member/sellList";
+               },
+               error: function(error) {
+                  console.log(error);
+                  return false;
+               }
+            });
+      
+      }
+   };
+</script>
+	
+</body>
+</html>

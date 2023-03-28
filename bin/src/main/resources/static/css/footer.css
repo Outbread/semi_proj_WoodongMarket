@@ -1,0 +1,32 @@
+@font-face {
+	font-family: 'Cafe24SsurroundAir';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.Footer {
+	position: relative;
+	height: 50px;
+	width: 100%;
+	transform : translateY(-100%);
+}
+       
+#wrapper{
+	height: 10px;
+	padding-bottom: 30px;
+}
+
+.woodongInfo {
+	display: flex;
+	justify-content: center;
+	color: grey;
+	margin-top: 10px;
+}
+
+.width {
+   width: 70px;
+}
+
+.reserved{
+   text-align: center;
+}

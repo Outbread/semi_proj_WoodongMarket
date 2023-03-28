@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>Insert title here</title>
+</head>
+<style>
+   
+   .table{
+      width: 800px;
+   }
+   #images{
+      width:100%;
+      display: flex;
+      justify-content: center;
+   }
+   #imgSize{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width:700px;
+   }
+   .profileSize {
+      width: 30px;
+   }
+   .memberInfo {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+   }
+   .profileSize {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      margin-right: 10px;
+   }
+   .reportBtn {
+      justify-content: flex-end;
+   }
+   .memberPic {
+      display: flex;
+      align-items: center
+   }
+   .green {
+        color: green;
+   }
+   .red {
+        color: red;
+   }
+   .line {
+        border-bottom: 1px solid grey;
+   }
+   .content {
+        border: 1px solid grey;
+        border-radius: 20px;
+        padding: 20px;
+   }
+   .oneLine {
+        border: 0px;
+       height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+   }
+   .row {
+        height: 60px;
+        align-items: center;
+   }
+</style>
+<body>
+   <script>
+      const successMessage = "[[${ modifySuccessMessage }]]";
+      successMessage && alert(successMessage);
+   </script>
+   
+   <form id="comment" method="post">
+      <input type="hidden" th:value="${ reply?.postCode }" name="postCode">
+      <input type="hidden" th:value="${ reply?.replyCode }" name="replyCode">  
+      <input type="hidden" th:value="${ reply?.memberCode }" name="memberCode">  
+      <input type="hidden" th:value="${ reply?.reply }" name="reply">  
+      <input type="hidden" th:value="${ reply?.replyTime }" name="replyTime">  
+         <tr th:each="reply : ${ replyList }">
+            <td>   
+                <td>작성자코드</td>
+               <td name="memberCode" th:text="${ reply?.memberCode }"></td>
+            </td>
+            <br>
+            
+            <td>   
+                <td>댓글내용</td>   
+               <td name="reply" th:text="${ reply?.reply }"></td>
+            </td>
+            <br>
+            
+            <td>   
+                <td>작성시간</td>   
+               <td name="replyTime" th:text="${ reply?.replyTime }"></td>
+            </td>
+            <br>
+   </form>
+   
+   <div th:include="common/header.html"></div>
+   
+   <table align="center" class="table">
+       <tr>
+             <td class="line" colspan="3"><h2 name="productName" th:text="${ post.productName }"></h2></td>
+       </tr>
+   	   <tr class="row">
+   	   	   <td>
+	   	   		<span th:text="${post.uploadDate}" style="text-align:right;"></span>
+   	   	   </td>
+   	   	   <td></td>
+	   	   <td class="oneLine">
+	   	   		<div><img src="/images/view.png" style="width:30px;"></img><span th:text="${ post.viewCount }"></span></div>
+	   	   </td>
+	   </tr>
+   	   
+   	   <tr>
+   	       <td colspan="3">
+			   <div id="images"><img th:src="'/postPic/' + ${ pic.newName }" id="imgSize"></img></div>
+		   </td>
+	   </tr>
+	   <tr>
+	       <td colspan="3" class="line">
+			   <div class="memberInfo">
+					<div class="memberPic">
+						<input type="hidden" th:value="${member.nickname}" name="nickname">
+						<img th:src="${member.profile}" class="profileSize">
+						<h4 th:text="${member.nickname}" name="nickname"></h4>
+					</div>
+					<button onclick="reportFunction()" id="button">신고</button>
+				</div> 
+	       </td>
+	   </tr>
+	   
+	   <tr>
+	   		<td colspan="2">
+	   			<span>카테고리: </span>
+				<th:block th:switch="${post.categoryCode}">
+			        <span th:case="1">의류</span>
+			        <span th:case="2">전자기기</span>
+			        <span th:case="3">문화</span>
+			        <span th:case="4">미용잡화</span>
+			        <span th:case="5">가구</span>
+			    </th:block>
+		    </td>
+   			<td style="text-align:right;"><span>상품 개수: </span><span th:text="${ post.productTotal }"></span></td>
+	   </tr>
+	   <tr class="row">
+	   	    <td><h3><span name="price" th:text="${ post.price }" style="color: rgba(255, 107, 61, 1)"></span>원</h3></td>
+	   		<td colspan="2" style="text-align:right;"> 
+	   	    	<th:block th:switch="${ post.discountYn }">
+			        <span th:case="N" class="red">네고불가</span>
+			        <span th:case="Y" class="green">네고가능</span>
+			    </th:block>
+	   	    	<th:block th:switch="${ post.tradeableYn }">
+			        <span th:case="N" class="red">교환불가</span>
+			        <span th:case="Y" class="green">교환가능버튼</span>
+			    </th:block>
+	   	     </td>
+	   </tr>
+	   <tr>
+	   </tr>
+	   <tr class="row">
+	   	     <td colspan="3" name="productContent" th:text="${ post.productContent }" class="content"></td>
+	   </tr>
+	   <tr>
+	   </tr>
+	   <tr>
+   	     <td>
+   	     </td>
+	   </tr>	   
+	</table>	
+
+
+
+	<span th:if="${post.sellerCode == #authentication.principal.memberCode}">
+	<form id='post_frm' action="/post/modify" method="post">
+		<input type="hidden" th:value="${post.postCode}" name="postCode">
+		<input type="hidden" th:value="${post.price}" name="price">  
+		<input type="hidden" th:value="${post.productContent}" name="productContent">  
+		<input type="hidden" th:value="${post.productName}" name="productName">  
+		<input type="hidden" th:value="${post.productTotal}" name="productTotal"> 
+		<input type="hidden" th:value="${post.sellerCode}" name="sellerCode"> 
+			
+			
+				<span th:if="${post.sellerCode == #authentication.principal.memberCode}"><input id="modify" type="submit" value="수정"></span>
+
+	<!-- 		<input id="modify" type="submit" value="수정"> -->
+			
+
+	</form>
+	
+		<input id="modify" type="submit" value="수정">
+	</form>
+	</span>
+	
+	<span th:if="${post.sellerCode == #authentication.principal.memberCode}">
+ 		<form th:action="@{'/post/' + ${postCode}}" method="post">
+				<input type="hidden" name="_method" value="delete"/>
+				<button>삭제</button>
+		</form>
+	</span>
+	</div>	
+         <tr class="row">
+               <td>
+                  <span th:text="${post.uploadDate}" style="text-align:right;"></span>
+               </td>
+               <td></td>
+            <td class="oneLine">
+                  <div><img src="/images/view.png" style="width:30px;"></img><span th:text="${ post.viewCount }"></span></div>
+                 <div><img src="/images/heart.png" style="width:30px;"></img><span th:text="${ post.likeCount }"></span></div>
+            </td>
+      </tr>
+         
+         <tr>
+             <td colspan="3">
+            <div id="images"><img th:src="'/postPic/' + ${ pic.newName }" id="imgSize"></img></div>
+         </td>
+      </tr>
+      <tr>
+          <td colspan="3" class="line">
+            <div class="memberInfo">
+               <div class="memberPic">
+                  <input type="hidden" th:value="${member.nickname}" name="nickname">
+                  <img th:src="${member.profile}" class="profileSize">
+                  <h4 th:text="${member.nickname}" name="nickname"></h4>
+               </div>
+               <button onclick="reportFunction()" id="button">신고</button>
+            </div> 
+          </td>
+      </tr>
+      
+      <tr>
+            <td colspan="2">
+               <span>카테고리: </span>
+            <th:block th:switch="${post.categoryCode}">
+                 <span th:case="1">의류</span>
+                 <span th:case="2">전자기기</span>
+                 <span th:case="3">문화</span>
+                 <span th:case="4">미용잡화</span>
+                 <span th:case="5">가구</span>
+             </th:block>
+          </td>
+            <td style="text-align:right;"><span>상품 개수: </span><span th:text="${ post.productTotal }"></span></td>
+      </tr>
+      <tr class="row">
+             <td><h3><span name="price" th:text="${ post.price }" style="color: rgba(255, 107, 61, 1)"></span>원</h3></td>
+            <td colspan="2" style="text-align:right;"> 
+                <th:block th:switch="${ post.discountYn }">
+                 <span th:case="N" class="red">네고불가</span>
+                 <span th:case="Y" class="green">네고가능</span>
+             </th:block>
+                <th:block th:switch="${ post.tradeableYn }">
+                 <span th:case="N" class="red">교환불가</span>
+                 <span th:case="Y" class="green">교환가능버튼</span>
+             </th:block>
+              </td>
+      </tr>
+      <tr>
+      </tr>
+      <tr class="row">
+              <td colspan="3" name="productContent" th:text="${ post.productContent }" class="content"></td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+           <td>
+           </td>
+      </tr>      
+   </table>   
+
+   <span th:if="${post.sellerCode == #authentication.principal.memberCode}">
+   <form id='post_frm' action="/post/modify" method="post">
+      <input type="hidden" th:value="${post.postCode}" name="postCode">
+      <input type="hidden" th:value="${post.price}" name="price">  
+      <input type="hidden" th:value="${post.productContent}" name="productContent">  
+      <input type="hidden" th:value="${post.productName}" name="productName">  
+      <input type="hidden" th:value="${post.productTotal}" name="productTotal"> 
+      <input type="hidden" th:value="${post.sellerCode}" name="sellerCode"> 
+         
+      <input id="modify" type="submit" value="수정">
+   </form>
+   </span>
+   
+   <span th:if="${post.sellerCode == #authentication.principal.memberCode}">
+       <form th:action="@{'/post/' + ${postCode}}" method="post">
+            <input type="hidden" name="_method" value="delete"/>
+            <button>삭제</button>
+      </form>
+   </span>
+   </div>   
+   
+   <!-- <button onclick="location.href='/trade/regist/[[${post.postCode}]]'">교환교환교환</button> -->
+      <th:block sec:authorize="isAnonymous()">
+         <button onclick="alert('로그인 후 이용해주세요.')">교환</button>
+      </th:block>
+      <th:block sec:authorize="isAuthenticated()">
+         <button onclick="tradeFunction()">교환</button>
+     </th:block>
+
+	<form id="reply" method="post">
+		<input type="hidden" th:value="${ reply?.postCode }" name="postCode"> 
+		<input type="hidden" th:value="${ reply?.replyCode }" name="replyCode">  
+		<input type="hidden" th:value="${ reply?.memberCode }" name="memberCode">  
+		<input type="hidden" th:value="${ reply?.reply }" name="reply">  
+		<input type="hidden" th:value="${ reply?.replyTime }" name="replyTime">  
+			<tr th:each="reply : ${ replyList }">
+				<td>	
+				    <td>작성자코드</td>
+					<td th:text="${ reply?.memberCode }"></td>
+				</td> 
+   <form id="reply" method="post">
+<!--       <input type="hidden" th:value="${ reply?.postCode }" name="postCode"> -->
+<!--       <input type="hidden" th:value="${ reply?.replyCode }" name="replyCode">  
+      <input type="hidden" th:value="${ reply?.memberCode }" name="memberCode">  
+      <input type="hidden" th:value="${ reply?.reply }" name="reply">  
+      <input type="hidden" th:value="${ reply?.replyTime }" name="replyTime">   -->
+         <tr th:each="reply : ${ replyList }">
+            <td>   
+                <td>작성자코드</td>
+               <td th:text="${ reply?.memberCode }"></td>
+            </td> 
+
+            <td>   
+                <td>댓글내용</td>   
+               <td th:text="${ reply?.reply }"></td>
+            </td>
+            
+            <td>   
+                <td>작성시간</td>   
+               <td th:text="${ reply?.replyTime }"></td>
+            </td>
+         </tr>
+   </form>
+   
+   <div th:include="common/footer.html"></div>
+   
+</body>
+<script th:inline="javascript">
+   let tradeFunction = () => { 
+      location.href='/trade/regist/[[${post.postCode}]]';
+   }
+
+   let reportFunction = () => {
+      location.href='/report/regist/[[${post.sellerCode}]]';
+   }
+
+$(function(){
+   $('#modify').click(function(){
+      post_frm.action = "/post/modify"
+      post_frm.method='post';
+      post_frm.submit();
+   });
+});
+ 
+
+
+    $('#delete').click(function(){
+         post_frm2.action="/post/delete"
+         post_frm2.method='post';
+         post_frm2.submit();
+         });
+
+/*
+$(function(){
+   $('#trade').click(function(){
+         post_frm.action="/trade/regist"
+         post_frm.method='post';
+         post_frm.submit();      
+         });
+});
+
+$(function(){
+   $('#report').click(function(){
+         post_frm.action="/report/regist"
+         post_frm.method='post';
+         post_frm.submit();
+         });
+});
+ */
+</script>
+</html>

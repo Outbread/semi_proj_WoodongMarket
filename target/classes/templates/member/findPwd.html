@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/findPwd.css">
+</head>
+<body>
+	<div th:include="common/header.html"></div>
+	<h3 class="one">비밀번호를 잊으셨나요?</h3>
+	
+	<h3 class="two" align="center">개인정보를 입력하세요</h3>
+	<table align="center" class="table">
+		<tr>
+			<td class="row">아이디</td>
+			<td><input type="text" name="memberId" id="memberId"></td>
+		</tr>
+        <tr>
+			<td class="row">본인확인 질문</td>
+			<td>
+				<select name="question" id="question">
+					<option>당신의 보물1호는?</option>
+					<option>제일 좋아하는 음식은?</option>
+					<option>나의 첫 반려동물 이름은?</option>
+					<option>가장 존경하는 위인은?</option>
+				</select>
+			</td>
+			<td rowspan="2">
+				<button type="button" id="searchEmail">검색하기</button>
+			</td>
+		</tr>
+		<tr>
+			<td class="row">본인확인 답변</td>
+			<td><input type="text" name="answer" id="answer"></td>
+		</tr>
+	</table>
+	<div th:include="common/footer.html"></div>
+	
+	<script type="text/javascript">
+		
+		var email = "";
+		
+		$("#searchEmail").click(function() {
+			$.ajax({
+				url: "searchEmail",
+				type: "get",
+				data: {
+					memberId: memberId.value,
+					question: question.value,
+					answer: answer.value
+				},
+				success: function(data) {
+					console.log(data);
+					email = data.email;
+					console.log(data.email);
+					if(data.email){
+						alert(data.email + '으로 임시 비밀번호를 전송했습니다.');
+						$.ajax({
+							url: "sendEmail",
+							type: "post",
+							data: {
+								memberId: memberId.value,
+								email: data.email
+							},
+							success: function(data) {
+								console.log(data);
+							},
+							error: function(error) {
+								console.log(error);
+							}
+						}) 
+						location.href="findPwdResult";
+					} else {
+							alert("일치하는 정보가 없습니다.")
+							
+					}
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			});
+		});
+		
+	</script>
+</body>
+</html>

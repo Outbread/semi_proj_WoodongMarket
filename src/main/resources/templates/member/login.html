@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+	<div th:include="common/header.html"></div>
+	<h3 align="center" th:text="${message}"></h3>
+	
+	<form action="/member/login" method="post">
+		<table id="box">
+			<tr>
+				<td>
+					<input id="idbox" type="text" name="username" placeholder="ID를 입력해주세요."> <!-- 꼭 username으로 -->
+				</td>
+			</tr>
+            <tr>
+				<td>
+					<input id="pwdbox" type="password" name="password" placeholder="비밀번호를 입력해주세요."> <!-- 꼭 password로 -->
+				</td>
+            </tr>
+			<tr>
+				<td>
+					<input type="submit" name="login" value="로그인" id="loginbtn">
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	<table align="center" id="movebox">
+		<tr>
+			<td>
+				<button id="findbtn" onclick="location.href='findId'">아이디 찾기</button>
+			</td>
+			<td> | </td>
+			<td>
+				<button id="findbtn" onclick="location.href='findPwd'">비밀번호 찾기</button>
+			</td>
+			<td> | </td>
+			<td>
+				<button id="findbtn" onclick="location.href='register'">회원가입</button>
+			</td>
+		</tr>	
+	</table>
+	<div th:include="common/footer.html"></div>
+	
+</body>
+</html>

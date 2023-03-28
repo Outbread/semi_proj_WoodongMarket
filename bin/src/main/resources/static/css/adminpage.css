@@ -1,0 +1,21 @@
+#total {
+	border: 1px solid black;
+	text-align: center;
+	width: 300px;
+	margin-top:20px;
+}
+.profileSize {
+	width: 30px;
+	height: 30px;
+	border-radius: 10px;
+	margin-right: 10px;
+}
+table {
+	border-collapse: collapse;
+	border: grey;
+	text-align: center;
+}
+img {
+	width: 50px;
+	margin-right: 10px;
+}

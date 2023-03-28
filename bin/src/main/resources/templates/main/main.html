@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+   <div th:include="common/header.html"></div>
+   
+   <form action="/post/detail" method="post" align="center">
+      <table align="center" id="table" border="1">
+         <tr>
+            <th>게시물 제목</th>
+            <th>가격</th>
+            <th>조회수</th>
+            <th>업로드 날짜</th>
+            <th>상품개수</th>
+            <th>거래지역</th>
+            <th>네고여부</th>
+         </tr>
+         <tr th:each="post: ${ postList }">
+            <!-- <td><a th:href="'/post/'+${post?.postCode}" th:text="${ postImage.newName }"></a></td> -->
+            <td><a th:href="'/post/'+${post.postCode}" th:text="${ post.productName }"></a></td>
+            <td th:text="${ post.price }" id="1"></td>
+            <td th:text="${ post.viewCount }" id="2"></td>
+            <td th:text="${ post.uploadDate }" id="3"></td>
+            <td th:text="${ post.productTotal }" id="4"></td>
+            <td th:text="${ post.location }" id="5"></td>
+            <td th:text="${ post.discountYn }" id="6"></td>
+            <br>
+         </tr>
+      </table>
+   </form>
+   <div th:include="common/footer.html"></div>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:include="common/header.html"></div>
+	<form action="/post/search" method="post" align="center">
+		<tr th:each="post: ${ postList }">
+			<td><a th:href="'/post/'+${post?.postCode}" th:text="${ post?.productName }"></a></td>
+			<td th:text="${ post?.price }"></td>
+			<td th:text="${ post?.viewCount }"></td>
+			<br>
+		</tr>
+	</form>
+	<div th:replace="post/paging.html"></div>
+</body>
+</html>

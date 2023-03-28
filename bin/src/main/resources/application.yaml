@@ -1,0 +1,52 @@
+server:
+  port: 8282
+
+## DB 커넥션 설정
+
+spring:
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:oracle:thin:@localhost:1521:xe
+    username: C##WOODONG
+    password: WOODONG
+    hikari:
+      auto-commit: false
+    mvc:
+      hiddenmethod:
+        filter:
+          enabled: true
+
+  # jpa config
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    database: oracle
+    properties:
+      hibernate:
+        '[format_sql]': true
+
+  # 업로드 파일 크기 제한
+  servlet:
+    multipart:
+      file-size-threshold: 1MB
+      location: C:/Temp
+      max-file-size: 10MB
+      max-request-size: 10MB
+      
+  # smtp  
+  # 계정 비밀번호 (dnflehdsp)
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: woodongmk@gmail.com
+    password: twduprhyzmweysce
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+logging:
+  level:
+    root: error

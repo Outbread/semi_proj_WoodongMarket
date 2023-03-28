@@ -1,0 +1,49 @@
+.content {
+	width: 350px;
+	height: 45px;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+.title {
+	width: 140px;
+}
+.t {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+.reportTable {
+	width: 1100px;
+	text-align: center;
+	border-collapse: collapse;
+}
+
+#reportList {
+	height: 900px;
+}
+th {
+	background-color: cadetblue;
+	color: white;
+}
+.red {
+	color: red;
+	font-weight:bolder;
+}
+.blue {
+	color: blue;
+}
+.code {
+	width: 45px;
+}
+.active {
+	width: 60px;
+}
+.grey {
+	background-color: rgb(192, 192, 192);
+	color: grey;
+}

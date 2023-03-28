@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		const registSuccessMessage = "[[${ registSuccessMessage }]]";
+		registSuccessMessage && alert(registSuccessMessage);
+	</script>
+	<script>
+		const modifySuccessMessage = "[[${ modifySuccessMessage }]]";
+		modifySuccessMessage && alert(modifySuccessMessage);
+	</script>
+	<div th:replace="common/header.html"></div>
+	<h3 align="center">보낸 교환 요청들</h3>
+
+	<table align="center" border="1">
+		<tr>
+			<th>보낸 요청</th>
+			<th>보낸 날</th>
+			<th>수정</th>
+			<th>삭제</th>
+		</tr>
+		<tr th:each="send : ${ sendList }">
+			<td th:text="${send.trTitle}"></td>
+			<td th:text="${ send.trDate }"></td>
+			<td><a th:text="수정" th:href="'/trade/modify/'+ ${send.trCode}"></a></td>
+			<td><a th:text="삭제" th:href="'/trade/delete/'+ ${send.trCode}"></a></td>
+		</tr>
+	</table>
+	<div th:include="common/footer.html"></div>
+</body>
+</html>

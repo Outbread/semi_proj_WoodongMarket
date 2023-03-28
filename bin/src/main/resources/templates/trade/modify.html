@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	<h3 align="center">교환 신청 수정</h3>
+	<form action="/trade/sendlist" method="post">
+    	<!--  <input type="file" name="imageCode" th:value="${trade?.trCode?.imageCode }" ><br>-->
+    	<input type="text" name="trTitle" th:value="${ trade?.trTitle }" ><br>
+        <textarea name="trContent" th:text="${ trade?.trContent }" style="height:250px; width:500px;"></textarea><br>
+		<input type="submit" value="수정하기" >
+	</form>
+	<div th:include="common/footer.html"></div>
+</body>
+</html>

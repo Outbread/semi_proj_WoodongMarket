@@ -1,0 +1,315 @@
+#top{
+   margin-top: 50px;
+   font-family: 'Cafe24SsurroundAir';
+}
+
+#loginedName{
+   color: #FF6B3D;
+   font-family: 'Cafe24SsurroundAir';
+}
+
+#box{
+   padding: 10px;
+   margin: 0 auto;
+   margin-top: 50px;
+   margin-bottom: 50px;
+   text-align: center;
+   border: 1px solid grey;
+   border-radius: 10px;
+   width: 600px;
+   height: 410px;
+}
+
+#table{
+   margin-top: 20px;
+}
+
+#letter{
+   margin-top: 0px;
+   display: flex;
+}
+
+#caution{
+   font-weight: bold;
+   display: flex;
+   justify-content: center;
+   color: red;
+   margin-top: 50px;
+}
+
+#check{
+   border: none;
+   border-radius: 10px;
+   background-color:#FF6B3D;
+   width: 50px;
+   height: 30px;
+   font-family: 'Cafe24SsurroundAir';
+   font-weight: bolder;
+   font-size: 15px;
+   text-align: center;
+   color: white;
+}
+
+#check:hover{
+   cursor: pointer;
+   background-color: #ff8e43;
+}
+   
+#button {
+   margin-top: 20px;
+   justify-content: center;
+   align-items: center;
+   border:0px;
+   background-color:#FF6B3D;
+   border-radius:10px;
+   width: 120px;
+   height: 40px;
+   font-family: 'Cafe24SsurroundAir';
+   font-weight: bolder;
+   font-size: 15px;
+   text-align: center;
+   color: white;
+   cursor:pointer;
+}
+
+#profile {
+   width: 200px;
+   margin-right: 30px;
+   border-radius: 20px;
+}
+
+#change{
+   margin-left: 637px;
+   width: 150px;
+   height: 25px;
+   display: inline;
+}
+
+#pwdBtn{
+   align-items: center;
+   border:0px;
+   background-color:#FF6B3D;
+   border-radius:10px;
+   width: 120px;
+   height: 40px;
+   font-family: 'Cafe24SsurroundAir';
+   font-weight: bolder;
+   font-size: 15px;
+   text-align: center;
+   color: white;
+   cursor:pointer;
+}
+
+#sellListBtn{
+   margin-left: 30px;
+   align-items: center;
+   border:0px;
+   background-color:#FF6B3D;
+   border-radius:10px;
+   width: 150px;
+   height: 40px;
+   font-family: 'Cafe24SsurroundAir';
+   font-weight: bolder;
+   font-size: 15px;
+   text-align: center;
+   color: white;
+   cursor:pointer;
+}
+
+#tradeList{
+   margin-left: 30px;
+   width: 1500px;
+   height: 30px;
+   display: inline;
+}
+
+#tradeBtn{
+   align-items: center;
+   border:0px;
+   background-color:#FF6B3D;
+   border-radius:10px;
+   width: 120px;
+   height: 40px;
+   font-family: 'Cafe24SsurroundAir';
+   font-weight: bolder;
+   font-size: 15px;
+   text-align: center;
+   color: white;
+   cursor:pointer;
+}
+
+#tradeSendList{
+   margin-left: 30px;
+   width: 150px;
+   height: 30px;
+   display: inline;
+}
+
+#sendBtn{
+   align-items: center;
+   border:0px;
+   background-color:#FF6B3D;
+   border-radius:10px;
+   width: 120px;
+   height: 40px;
+   font-family: 'Cafe24SsurroundAir';
+   font-weight: bolder;
+   font-size: 15px;
+   text-align: center;
+   color: white;
+   cursor:pointer;
+	margin-top: 50px;
+	font-family: 'Cafe24SsurroundAir';
+}
+
+#loginedName{
+	color: #FF6B3D;
+	font-family: 'Cafe24SsurroundAir';
+}
+
+#box{
+	padding: 10px;
+	margin: 0 auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	text-align: center;
+	border: 1px solid grey;
+	border-radius: 10px;
+	width: 600px;
+	height: 410px;
+}
+
+#table{
+	margin-top: 20px;
+}
+
+#letter{
+	margin-top: 0px;
+	display: flex;
+}
+
+#caution{
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	color: red;
+	margin-top: 50px;
+}
+
+#check{
+	border: none;
+	border-radius: 10px;
+	background-color:#FF6B3D;
+	width: 50px;
+	height: 30px;
+	font-family: 'Cafe24SsurroundAir';
+	font-weight: bolder;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+}
+
+#button {
+	margin-top: 20px;
+	justify-content: center;
+	align-items: center;
+	border:0px;
+	background-color:#FF6B3D;
+	border-radius:10px;
+	width: 120px;
+	height: 40px;
+	font-family: 'Cafe24SsurroundAir';
+	font-weight: bolder;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	cursor:pointer;
+}
+
+#profile {
+	width: 200px;
+	margin-right: 30px;
+	border-radius: 20px;
+}
+
+#change{
+	margin-left: 637px;
+	width: 150px;
+	height: 25px;
+	display: inline;
+}
+
+#pwdBtn{
+	align-items: center;
+	border:0px;
+	background-color:#FF6B3D;
+	border-radius:10px;
+	width: 120px;
+	height: 40px;
+	font-family: 'Cafe24SsurroundAir';
+	font-weight: bolder;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	cursor:pointer;
+}
+
+#sellListBtn{
+	margin-left: 30px;
+	align-items: center;
+	border:0px;
+	background-color:#FF6B3D;
+	border-radius:10px;
+	width: 150px;
+	height: 40px;
+	font-family: 'Cafe24SsurroundAir';
+	font-weight: bolder;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	cursor:pointer;
+}
+
+#tradeList{
+	margin-left: 30px;
+	width: 1500px;
+	height: 30px;
+	display: inline;
+}
+
+#tradeBtn{
+	align-items: center;
+	border:0px;
+	background-color:#FF6B3D;
+	border-radius:10px;
+	width: 120px;
+	height: 40px;
+	font-family: 'Cafe24SsurroundAir';
+	font-weight: bolder;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	cursor:pointer;
+}
+
+#tradeSendList{
+	margin-left: 30px;
+	width: 150px;
+	height: 30px;
+	display: inline;
+}
+
+#sendBtn{
+	align-items: center;
+	border:0px;
+	background-color:#FF6B3D;
+	border-radius:10px;
+	width: 120px;
+	height: 40px;
+	font-family: 'Cafe24SsurroundAir';
+	font-weight: bolder;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	cursor:pointer;
+}

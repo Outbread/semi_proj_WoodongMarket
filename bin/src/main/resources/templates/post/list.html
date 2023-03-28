@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div th:include="common/header.html"></div>
+	<table>
+		<tr th:each="post : ${ postList }">
+			<td th:text="${ post.postCode }"></td>
+			<td th:text="${ post.productName }"></td>
+			<td th:text="${ post.price }"></td>
+			<td th:text="${ post.viewCount }"></td>
+		</tr>
+	</table>
+	<div th:include="common/footer.html"></div>
+</body>
+</html>

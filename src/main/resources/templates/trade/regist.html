@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<style type="text/css">
+	@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
+	#wrapbody{
+		width: 500px;
+		margin : auto;
+		height: 100%;
+	}
+	#namehead {
+		font-family: 'Cafe24SsurroundAir';
+		font-size: 25px;
+		font-weight: bolder;
+		margin-top: 50px;
+		margin-bottom: 50px;
+		border-bottom: solid 1px #FF6B3D;
+		text-align: center;
+		
+	}
+	
+	#nametext {
+		margin-bottom: 35px;
+		display: flex;
+   	 	justify-content: center;
+   	 	align-items: center;
+   	 	font-family: 'Cafe24Ssurround';
+		color: #FF6B3D;
+	}
+	
+	#img {
+		text-align: center;
+		width: 500px;
+		border: 2px solid #FF6B3D;
+		border-radius: 10px;
+	}
+	
+	.filebox {
+		margin-bottom: 50px;
+	}
+	
+	.filebox .upload-name {
+		float: left;
+	    display: inline-block;
+	    height: 25px;
+	    padding: 0 10px;
+	    vertical-align: middle;
+	    border: 1px solid #bcbcbc;
+	    width: 360px;
+	    color: #999999;
+	    margin-right: 15px;
+	    margin-left: 10px;
+	}
+
+	.filebox label {
+		font-family: 'Cafe24SsurroundAir';
+	    float: left;
+	    height: 13px;
+	    padding: 7px 10px;
+	    
+	    vertical-align: middle;
+	    color: #fff;
+	    background-color: #999999;
+	    cursor: pointer;
+	    width: 70px;
+	    text-align: center;
+	    font-size: 14px;
+	    
+	}
+
+	.filebox input[type="file"] {
+	    position: absolute;
+	    width: 0;
+	    height: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    border: 0;
+	}
+	
+	#contentbox {
+		font-family: 'Cafe24SsurroundAir';
+		border: 2px solid #FF6B3D;
+		border-radius: 10px;
+		height: 400px;
+		width: 500px;
+		
+	}
+
+	#titlebox {
+		font-family: 'Cafe24SsurroundAir';
+		border: none;
+		margin-top: 20px;
+		margin-bottom: 10px;
+		font-size: 18px;
+		text-align: left;
+		align-content: flex-end;
+		width: 450px;
+		
+	}
+	#hr {
+		width: 478px;
+	}
+	
+	#textarea {
+		font-family: 'Cafe24SsurroundAir';
+		border: none;
+		font-size: 18px;
+		width: 450px;
+		height: 300px;
+		margin-top: 20px;
+		resize: none;
+	}
+	
+	#subbtn{
+		font-family: 'Cafe24SsurroundAir';
+		border: none;
+		color: white;
+		background-color: #FF6B3D;
+		width: 120px;
+		padding: 10px;
+		font-size: 20px;
+		margin-top: 10px;
+		border-radius: 10px;
+		margin-left: 385px;
+	}
+</style>
+</head>
+<body>
+<div th:include="common/header.html"></div>
+<div id="wrapbody">
+	<div id="namehead">
+		<div id="nametext">교환 요청 보내기</div>
+	</div>
+	<form action="/trade/regist" method="post" align="center" encType="multipart/form-data">
+		<input type="hidden" th:value="${postCode}" name="postCode">
+		<div class="imageBox">
+			<img id="img" src="/images/addpic.png" style="height:300px;" class="image">
+		</div>
+		<div class="filebox">
+			<input  class="upload-name" value="첨부파일"  placeholder="첨부파일">
+		    <label for="file">사진업로드</label> 
+		    <input type="file" id="file" name="tradepic" onchange="setThumbnail(this);">
+		</div>
+		<div id="contentbox">
+		    <input id="titlebox" type="text" placeholder="제목을 입력해주세요." name="trTitle">
+		    <hr id="hr">
+		    <textarea id="textarea"  name="trContent" placeholder="내용을 입력해주세요."></textarea><br>
+		</div>
+		<input id="subbtn" type="submit" value="요청하기">
+	</form>
+	  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+    <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>
+<script>
+	function setThumbnail(input) {
+	        
+	        if (input.files && input.files[0]) {
+	        	var reader = new FileReader();
+	        	
+	        	reader.onload = function(e) {
+		        var $img = document.querySelector("#img");
+		        $img.setAttribute("src", event.target.result);
+		        $img.setAttribute("style", "max-width:500px; max-height:500px;");
+	        };
+	        reader.readAsDataURL(event.target.files[0]);
+			}
+		}
+	
+	/* file 명 뜨게 만들기 */	
+	$("#file").on('change',function(){
+  	var fileName = $("#file").val();
+ 	$(".upload-name").val(fileName);
+});
+</script>
+<div th:include="common/footer.html"></div>
+</body>
+</html>

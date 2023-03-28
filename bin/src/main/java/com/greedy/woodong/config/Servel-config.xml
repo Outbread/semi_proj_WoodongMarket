@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans>
+	<!-- 파일 업로드를 위한 빈 설정 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10000000"/> 
+    <!-- 대략 10Mbyte 용량의 파일 업로드까지 허용 -->
+	</beans:bean>
+</beans:beans>

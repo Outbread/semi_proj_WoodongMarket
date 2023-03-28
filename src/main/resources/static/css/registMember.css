@@ -1,0 +1,100 @@
+@font-face {
+	font-family: 'Pretendard-Regular';
+	src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Cafe24SsurroundAir';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#title {
+	margin-top: 50px;
+	font-family: 'Cafe24SsurroundAir';
+	font-weight: bolder;
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+#registForm {
+	font-family: 'Pretendard-Regular';
+	height: 1100px;
+}
+
+table {
+	width: 700px;
+}
+
+#buttonR {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	margin-top: 20px;
+}
+
+#orange {
+	align-items: center;
+	border: 0px;
+	background-color: #FF6B3D;
+	border-radius: 10px;
+	width: 70px;
+	height: 30px;
+	font-family: 'Cafe24SsurroundAir';
+	font-weight: bolder;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+}
+
+#orange:hover {
+    cursor:pointer;
+    background-color:#ff8e43;
+    color: white;
+}
+
+.terms {
+	width: 700px;
+	height: 140px;
+	border: 1px solid rgba(217, 217, 217, 1);
+	overflow-y: scroll;
+	padding: 10px;
+	text-overflow: ellipsis;
+}
+
+.red {
+	color: red;
+}
+
+.imageBox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	height: 130px;
+	border: 1px solid rgb(247, 247, 247);
+	margin-left: 50px;
+}
+
+#table {
+	border: 2px solid rgb(255, 183, 162);
+	padding: 30px;
+	border-radius: 40px;
+}
+
+.checkBox {
+	width: 18px;
+	height: 18px;
+}
+
+.space {
+	height: 10px;
+}
+
+#img {
+	width: 100px;
+}

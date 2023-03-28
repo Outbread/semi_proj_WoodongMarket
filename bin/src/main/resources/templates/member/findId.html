@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/findId.css">
+</head>
+<style>
+</style>
+<body>
+	<div th:include="common/header.html"></div>
+	<h3 class="left">&emsp;아이디 찾기</h3>
+	<div class="search">
+		<table align="center" id="search">
+			<tr>
+				<td class="row">이름</td>
+				<td><input type="text" name="memberName" id="memberName"></td>
+				<td rowspan="2">
+					<button type="button" id="searchId">검색하기</button>	<!-- 비동기 통신 버튼 -->
+				</td>
+			</tr>
+	           <tr>
+				<td class="row">전화번호</td>
+				<td><input type="tel" name="phone" id="phone"></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="result">
+		<!-- 결과값을 받을 form 태그 -->
+		<form method="post" id="result" align="center">
+		</form>
+	</div>
+	<div th:include="common/footer.html"></div>
+	
+	<script type="text/javascript">
+		
+		$("#searchId").click(function() {
+			
+
+			$.ajax({
+				url: "searchId",
+				type: "get",
+				data: {
+					memberName: memberName.value,
+					phone: phone.value,
+				},
+				success: function(data) {
+
+					const $form = document.querySelector("#result");
+					
+					$form.innerHTML = "";
+					
+					var id = "";
+					for(var i = 0; i < 4; i++) {
+						id += data.memberId.charAt(i);
+					}
+					var star ="";
+					for(var i = 4; i < data.memberId.length; i++) {
+						star +="*";
+					}
+
+					$firstLine = "<h2> 당신의 아이디는 <span style=\"color:red\">" + id + star + "</span> 입니다. </h2>"; 
+					$secondLine = "<h4>최초 가입일: <span style=\"color:blue\">" + data.enrollDate + "</span></h4>";
+					$button = document.createElement("button");
+					$button.textContent = "로그인";
+					
+					$form.insertAdjacentHTML('beforeend', $firstLine);
+					$form.insertAdjacentHTML('beforeend', $secondLine);
+					$form.appendChild($button);
+					
+					console.log(data);
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			});
+		});
+	
+	</script>
+</body>
+</html>

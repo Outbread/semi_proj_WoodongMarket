@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	img:hover {
+		cursor: pointer;
+	}
+	#findPwdForm {
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<div th:include="common/header.html"></div>
+	
+	<form action="/member/changePwd" method="post" id="findPwdForm">
+		<h4>전송된 임시 비밀번호는 '마이페이지 > 비밀번호변경'에서 변경 가능합니다.</h4>
+		<h4>아래를 클릭하여 우편함으로 이동하기</h4>
+		<img src="/images/gmail.png" style="width:100px" id="gmail">
+		<img src="/images/naver.png" style="width:100px; height:80px" id="naver">	
+	</form>
+	
+	<div th:include="common/footer.html"></div>
+	
+	<script>
+		$("#gmail").click(function() {
+			window.open("https://mail.google.com/", "GoogleMail", "width=1000, height=700, left=400, top=100");
+			location.href="/member/login";
+		});
+		
+		$("#naver").click(function() {
+			window.open("https://mail.naver.com/", "NaverMail", "width=1000, height=700, left=400, top=100");
+			location.href="/member/login";
+		});
+	</script>
+</body>
+</html>

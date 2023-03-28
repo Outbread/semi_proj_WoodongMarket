@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
+	
+	table{
+		border: none;
+		text-align: center;
+		font-family: 'Cafe24SsurroundAir';
+	}
+	
+	th{
+		text-align: center;
+		font-family: 'Cafe24SsurroundAir';
+		border-radius: 20px;
+		background-color: #FF6B3D;
+		color: white;
+		height: 25px;
+		font-size: 18px;
+		padding: 4px 150px;
+	}
+	
+	#headName{
+		font-family: 'Cafe24Ssurround';
+		font-weight: bolder;
+		color: #FF6B3D;
+		font-size: 25px;
+		margin-top: 70px;
+		margin-bottom: 40px;
+	}
+	
+	th, td{
+		border: none;
+		border-bottom: 1px solid #FF6B3D;
+		font-family: 'Cafe24SsurroundAir';
+		
+	}
+	
+	
+	#midTH{
+		text-align: center;
+		font-family: 'Cafe24SsurroundAir';
+		border-radius: 20px;
+		background-color: #FF6B3D;
+		color: white;
+		height: 25px;
+		font-size: 18px;
+		padding: 4px 30px;
+	}
+	
+		
+	#litTH{
+		text-align: center;
+		font-family: 'Cafe24SsurroundAir';
+		border-radius: 20px;
+		background-color: #FF6B3D;
+		color: white;
+		height: 25px;
+		font-size: 18px;
+		padding: 4px 60px;
+	}
+	
+	#a{
+		font-family: 'Cafe24SsurroundAir';
+		border: none;
+		text-decoration: none;
+		text-align: center;
+	}
+	#a:link { 
+		color: black; 
+	}
+	#a:visited {
+		color: black; 
+		
+	}
+	#a:hover {
+		color: #FF6B3D;
+	}
+	
+</style>
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	<h3 id="headName" align="center">받은 교환 요청들</h3>
+	<table align="center" border="1">
+		<tr>
+			<th>받은 요청</th>
+			<th id="midTH">받은 날</th>
+			<th id="litTH">내가 올린 상품</th>
+		</tr>
+		
+		<tr th:each="trade : ${tradeMap}">
+			<th:block th:each="eachTrade : ${trade.value}">
+				
+				<td ><a id="a" th:text="${eachTrade.trTitle}" th:href="'/trade/donemodify/'+ ${eachTrade.trCode}"></a></td>
+				<td th:text="${eachTrade.trDate}"></td>
+				<th:block th:each="post : ${postList}">
+					<th:block th:if="${post.postCode eq eachTrade.postCode}">
+						<td ><a id="a" th:text="${post.productName}" th:href="'/post/'+ ${post.postCode}"></a></td>
+					</th:block>
+				</th:block>
+			</th:block>
+		</tr>
+	</table>
+	<div th:include="common/footer.html"></div>
+</body>
+</html>

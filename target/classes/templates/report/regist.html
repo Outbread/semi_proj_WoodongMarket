@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/registReport.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<div th:include="common/header.html"></div>
+	<div align="center" class="top">
+		<img src="/images/alert.png">
+		<h3><span th:text="${nickname}" class="color"></span>님을 신고하는 이유를 선택해주세요</h3>
+		
+		<form action="/report/regist" method="post" name="reportForm">
+			<div class="oneLine">
+				<input type="radio" name="reportReason" value="사기 당했어요" id="scam" class="opacity"/><label for="scam" class="reason">사기 당했어요</label>
+				<input type="radio" name="reportReason" value="비매너 사용자예요" id="noManners" class="opacity"/><label for="noManners" class="reason">비매너 사용자예요</label>
+				<input type="radio" name="reportReason" value="욕설을 해요" id="swear" class="opacity"/><label for="swear" class="reason">욕설을 해요</label>
+				<input type="radio" name="reportReason" value="다른 문제가 있어요" id="other" class="opacity"/><label for="other" class="reason">다른 문제가 있어요</label>
+			</div>
+			<h3>신고 내용을 입력해주세요</h3>
+			<table align="center" class="reportTable">
+			<tr>
+			   <td class="left">제목</td>
+			   <td><input type="text" name="reportTitle" placeholder="신고 제목을 입력해주세요" class="title"></td>
+			</tr>
+			<tr>
+			   <td class="left">내용</td>
+			   <td><div class="textBox"><textarea name="reportContent" maxlength="300" placeholder="신고 내용을 입력해주세요" class="content" onkeyup="count(this)"></textarea><div class="count"><span id="zero">0</span>/300</div></div></td>
+			</tr>
+		   </table>
+		   
+		   <input th:value="${nickname}" type="hidden" name="nickname">
+		   <input type="button" onclick="check()" id="button" value="신고하기">
+		</form>
+	</div>
+	<div th:include="common/footer.html"></div>
+</body>
+
+<script type="text/javascript">	
+
+	var num = 0;
+	function count(textarea) {
+			console.log(textarea.value.length);
+			$zero = document.querySelector("#zero");
+			$zero.innerText = textarea.value.length;
+    }
+	
+	function check() {
+		var form = document.reportForm;
+		
+		if(!form.reportReason.value){
+			alert("신고 사유를 선택하세요.");
+			return false;
+		}
+		
+		if(!form.reportTitle.value){
+			alert("신고 제목을 입력하세요.");
+			return false;
+		}
+		
+		if(!form.reportContent.value){
+			alert("신고 내용을 입력하세요.");
+			return false;
+		}
+		
+		form.action = "/report/regist"
+		form.method='post';
+		form.submit();
+	}
+	
+</script>
+</html>

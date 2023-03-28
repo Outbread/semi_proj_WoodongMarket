@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="/css/reportDetail.css">
+</head>
+<body>
+	<div th:include="common/header.html"></div>
+	<div id="reportDetail" align="center">
+		<img src="/images/alert.png" class="reportImage">
+
+		<h3><span th:text="${report?.memberCode?.nickname}" style="color:cadetblue"></span>님에 대한 신고 사유입니다.</h3>
+
+		<div class="reason">
+			<h4 th:text="${report.reportReason}"></h4>
+		</div>
+
+		<table align="center" class="reportTable">
+			<tr>
+				<td colspan="2">
+					<h3>신고 내용</h3>
+				</td>
+			</tr>
+			<tr>
+				<td class="left">제목</td>
+				<td>
+					<div th:text="${report?.reportTitle}" class="title"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="left">내용</td>
+				<td>
+					<div th:text="${report?.reportContent}" class="content"></div>
+				</td>
+			</tr>
+		</table>
+		<button id="button" onclick="location.href='/admin/reportList'">돌아가기</button>
+	</div>
+	<div th:include="common/footer.html"></div>
+</body>
+
+</html>

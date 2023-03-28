@@ -1,0 +1,183 @@
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#firstLine{
+    display: flex;
+    justify-content:space-between;
+    margin-top: 45px;
+}
+#LogoWrap{
+    display: flex;
+    justify-content: center;
+    height: 70px;
+    margin-left: 250px;
+}
+.logo{
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    margin-top: 5px;
+}
+
+#nameWrap{
+    margin-left: 10px;
+    width: 120px;
+}
+#nameExplain{
+    font-family: 'Cafe24SsurroundAir';
+    margin-left: 13px;
+    margin-bottom: 3px;
+    margin-top: 7px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #a65137;
+}
+#name{
+    font-family: 'Cafe24Ssurround';
+    font-size: 28px;
+    margin-left: 10px;
+    margin-top: 3px;
+    font-weight: bolder;
+    color: #FF6B3D;
+}
+#NavWrap{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    width: 500px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#searchBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #FF6B3D;
+    border-radius: 50px;
+    width:  100%;
+    height: 50px;
+}
+
+#searchLogo{
+    width: 20px;
+    height: 20px;
+
+}
+
+#btn{
+   border: none;
+   background-color: rgb(255, 255, 255);
+}
+
+#inputBox{
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 15px;
+    color: gray;
+    text-align: center;
+    outline: none;
+    border: none;
+    margin-left: 40px;
+}
+
+#infoWrap{
+    float: left;
+    display: flex;
+    justify-content: space-around;;
+    align-items: center;
+    width:  300px;
+    height: 70px;
+    margin-right: 250px;
+}
+#loginBox{
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+}
+#button{
+    justify-content: center;
+    align-items: center;
+    border:0px;
+    background-color:#FF6B3D;
+    border-radius:10px;
+    width: 70px;
+    height: 30px;
+    font-family: 'Cafe24SsurroundAir';
+    font-weight: bolder;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+}
+#user{
+
+    align-items: center;
+    width : 30px;
+    height: 30px;
+    margin-left : 50px;
+}
+
+#heart{
+    align-items: center;
+    width : 25px;
+    height: 25px;
+    margin-left : 50px;
+
+}
+#searchLogo:hover{
+    cursor:pointer;
+}
+#button:hover{
+    cursor:pointer;
+    background-color:#ff8e43;
+    color: white;
+}
+#user:hover{
+    cursor:pointer;
+}
+
+#heart:hover{
+    cursor:pointer;
+}
+
+#LogoWrap{
+   cursor:pointer;
+}
+
+#secondLine{
+    font-family: 'Cafe24SsurroundAir';
+    font-weight: bolder;
+    clear: both;
+    
+    border-bottom: 1px solid #bcbcbc;
+    margin-top: 42px;
+}
+
+#cateWrap{
+    margin-bottom: 22px;
+	display: flex;
+    justify-content:center;
+}
+
+.category{
+    float: left;
+    font-size: 17px;
+    align-items: center;
+    width: 330px;
+    height: 25px;
+    text-align: center;
+}

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="/css/registMember.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div th:include="common/header.html"></div>
+
+	<div id="title">
+		★ - - - - < 회원가입> - - - - ★
+	</div>
+
+	<form action="/member/register" method="post" name="userInfo" encType="multipart/form-data" id="registForm">
+		<table align="center" id="table">
+			<tr>
+				<td><span class="red">*</span> 아이디</td>
+				<td>
+					<input type="text" name="memberId" placeholder="아이디를 입력하세요" onkeydown="inputIdChk()" id="memberId">
+					<input type="hidden" name="idDuplication" value="idUncheck">
+				</td>
+				<td>
+					<input type="button" value="중복확인" id="idCheck"> 
+				</td>
+				<td><span class="red">*</span> 프로필 사진</td>
+			</tr>
+			<tr>
+				<td><span class="red">*</span> 비밀번호</td>
+				<td><input type="password" name="memberPwd" placeholder="특수문자/숫자 포함 6~12자리"></td>
+				<td></td>
+				<td rowspan="5">
+					<div class="imageBox">
+						<img id="img" src="/images/profile.png" class="image">
+						<div>
+				</td>
+			</tr>
+			<tr>
+				<td><span class="red">*</span> 비밀번호 확인</td>
+				<td><input type="password" name="pwdTest" placeholder="비밀번호 재확인"></td>
+			</tr>
+			<tr>
+				<td><span class="red">*</span> 이름</td>
+				<td><input type="text" name="memberName"></td>
+			</tr>
+			<tr>
+				<td><span class="red">*</span> 닉네임</td>
+				<td><input type="text" name="nickname"></td>
+			</tr>
+			<tr>
+				<td><span class="red">*</span> 생년월일</td>
+				<td><input type="date" name="birthDate"></td>
+			</tr>
+			<tr>
+				<td><span class="red">*</span> 성별</td>
+				<td>
+					<input type="radio" name="gender" value="남"><label>남성</label>
+					<input type="radio" name="gender" value="여"><label>여성</label>
+				</td>
+				<td></td>
+				<td><input type="file" name="fileName" onchange="setThumbnail(this);"></td>
+			</tr>
+			<tr>
+				<td><span class="red">*</span> 핸드폰번호</td>
+				<td><input type="tel" name="phone" placeholder="010-0000-0000"></td>
+				<td></td>
+				<td>
+					<span class="red">*</span> 본인확인질문 &nbsp;
+					<select name="question">
+						<option>당신의 보물1호는?</option>
+						<option>제일 좋아하는 음식은?</option>
+						<option>나의 첫 반려동물 이름은?</option>
+						<option>가장 존경하는 위인은?</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><span class="red">*</span>이메일주소</td>
+				<td>
+					<input id="email" type="email" name="email" onkeydown="inputEmailChk()">
+					<input type="hidden" name="emailDuplication" id="emailDuplication" value="emailUncheck">
+				</td>
+				<td>
+					<input type="button" value="중복확인" id="emailCheck"> &nbsp; &nbsp;
+				</td>
+				<td>
+					<span class="red">*</span> 본인확인답변 &nbsp;
+					<input type="text" name="answer">
+				</td>
+			</tr>
+			<tr>
+				<td><span class="red">*</span> 지역</td>
+				<td>
+					<select name="location">
+						<option>목동</option>
+						<option>신월동</option>
+						<option>신정동</option>
+					</select>
+				</td>
+				<td></td>
+				<td>
+					<span class="red">*</span> 관심카테고리 &nbsp;
+					<select name="favCategory" id="category">
+					</select>
+				</td>
+			</tr>
+			<tr class="space"></tr>
+			<tr>
+				<td colspan="4">
+					<h4><span class="red">*</span> 약관 동의</h4>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<input type="checkbox" id="checkAll" class="checkBox"> 회원가입 약관에 모두 동의합니다
+				</td>
+			</tr>
+			<tr class="space"></tr>
+			<tr>
+				<td colspan="4">
+					<input class="checkBox" type="checkbox" id="check1">
+					동의 <span class="red">(필수)</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<p align="left" class="terms">
+						서비스 이용약관<br><br>
+						제1조 (목적)이 약관은 우동마켓이 인터넷 사이트(https://www.woodong.co.kr)를 통하여 제공하는 중고 거래 서비스 및 기타 거래 관련 정보 등을 제공하는
+						서비스(이하 "서비스"라고 합니다)와 관련하여 우동마켓과 회원 간의 권리와 의무,
+						책임사항 및 회원의 서비스 이용절차에 관한 사항을 규정함을 목적으로 합니다<br><br>
+						제2조(정의)<br><br> 1) “몰”이란 (주)우동마켓이 재화 또는 용역(이하 “재화 등”이라 함)을 이용자에게 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여 재화
+						등을 거래할 수 있도록 설정한 가상의 영업장을 말하며, 아울러 사이버몰을 운영하는 사업자의 의미로도 사용합니다.<br><br> 2) “이용자”란 “몰”에 접속하여 이 약관에
+						따라 “몰”이 제공하는 서비스를 받는 회원 및 비회원을 말합니다.<br><br>
+						3) ‘회원’이라 함은 “몰”에 회원등록을 한 자로서, 계속적으로 “몰”이 제공하는 서비스를 이용할 수 있는 자를 말합니다. <br><br> 4) ‘비회원’이라 함은 회원에
+						가입하지 않고 “몰”이 제공하는 서비스를 이용하는 자를 말합니다.<br><br>제3조 (약관 등의 명시와 설명 및 개정)<br><br>
+						1) “몰”은 이 약관의 내용과 상호 및 대표자 성명, 영업소 소재지 주소(소비자의 불만을 처리할 수 있는 곳의 주소를 포함), 전화번호ㆍ모사전송번호ㆍ전자우편주소,
+						사업자등록번호, 통신판매업 신고번호, 개인정보관리책임자등을 이용자가 쉽게 알 수 있도록 00 사이버몰의 초기 서비스화면(전면)에 게시합니다. 다만, 약관의 내용은 이용자가
+						연결화면을 통하여 볼 수 있도록 할 수 있습니다.<br><br>
+						2) “몰은 이용자가 약관에 동의하기에 앞서 약관에 정하여져 있는 내용 중 청약철회ㆍ배송책임ㆍ환불조건 등과 같은 중요한 내용을 이용자가 이해할 수 있도록 별도의 연결화면
+						또는 팝업화면 등을 제공하여 이용자의 확인을 구하여야 합니다.<br><br> 3) “몰”은 「전자상거래 등에서의 소비자보호에 관한 법률」, 「약관의 규제에 관한 법률」,
+						「전자문서 및 전자거래기본법」, 「전자금융거래법」, 「전자서명법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」, 「방문판매 등에 관한 법률」, 「소비자기본법」 등
+						관련 법을 위배하지 않는 범위에서 이 약관을 개정할 수 있습니다.<br><br>
+						4) “몰”이 약관을 개정할 경우에는 적용일자 및 개정사유를 명시하여 현행약관과 함께 몰의 초기화면에 그 적용일자 7일 이전부터 적용일자 전일까지 공지합니다. 다만,
+						이용자에게 불리하게 약관내용을 변경하는 경우에는 최소한 30일 이상의 사전 유예기간을 두고 공지합니다. 이 경우 "몰“은 개정 전 내용과 개정 후 내용을 명확하게 비교하여
+						이용자가 알기 쉽도록 표시합니다.<br><br> 5) “몰”이 약관을 개정할 경우에는 그 개정약관은 그 적용일자 이후에 체결되는 계약에만 적용되고 그 이전에 이미 체결된
+						계약에 대해서는 개정 전의 약관조항이 그대로 적용됩니다. 다만 이미 계약을 체결한 이용자가 개정약관 조항의 적용을 받기를 원하는 뜻을 제3항에 의한 개정약관의 공지기간 내에
+						“몰”에 송신하여 “몰”의 동의를 받은 경우에는 개정약관 조항이 적용됩니다.<br><br>
+						5) 이 약관에서 정하지 아니한 사항과 이 약관의 해석에 관하여는 전자상거래 등에서의 소비자보호에 관한 법률, 약관의 규제 등에 관한 법률, 공정거래위원회가 정하는
+						전자상거래 등에서의 소비자 보호지침 및 관계법령 또는 상관례에 따릅니다.<br><br>
+					</p>
+				</td>
+			</tr>
+			<tr class="space"></tr>
+			<tr>
+				<td colspan="4">
+					<input type="checkbox" id="check2" class="checkBox">
+					동의 <span class="red">(필수)</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<p align="left" class="terms">
+						개인정보의 수집 이용 동의<br><br>
+						제 1 조(목적)<br><br>본 약관은 우동마켓 웹사이트(이하 "우동마켓")가 제공하는 모든 서비스(이하 "서비스")의 이용조건 및 절차, 회원과
+						우동마켓의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.<br><br>
+						제 2 조(약관의 효력과 변경)<br><br>1. 우동마켓은 이용자가 본 약관 내용에 동의하는 경우, 우동마켓의 서비스 제공 행위 및 회원의 서비스 사용
+						행위에 본 약관이 우선적으로 적용됩니다.<br>2. 우동마켓은 약관을 개정할 경우, 적용일자 및 개정사유를 명시하여 현행약관과 함께 우동마켓의 초기화면에 그
+						적용일 7일 이전부터 적용 전일까지 공지합니다. 단, 회원에 불리하게 약관내용을 변경하는 경우에는 최소한 30일 이상의 사전 유예기간을 두고 공지합니다. 이 경우
+						우동마켓은 개정 전 내용과 개정 후 내용을 명확하게 비교하여 회원이 알기 쉽도록 표시합니다.<br>
+						3. 변경된 약관은 우동마켓 홈페이지에 공지하거나 e-mail을 통해 회원에게 공지하며, 약관의 부칙에 명시된 날부터 그 효력이 발생됩니다. 회원이 변경된 약관에
+						동의하지 않는 경우, 회원은 본인의 회원등록을 취소(회원탈퇴)할 수 있으며, 변경된 약관의 효력 발생일로부터 7일 이내에 거부의사를 표시하지 아니하고 서비스를 계속 사용할
+						가. 개인정보의 수집 및 이용 목적<br><br> 1) 우동마켓은 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는
+						이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보 보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
+					</p>
+				</td>
+			</tr>
+		</table>
+		<div id="buttonR">
+			<button type="button" id="orange" onclick=checkValue()>회원가입</button>
+		</div>
+	</form>
+
+	<script>
+
+		function setThumbnail(input) {
+
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					var $img = document.querySelector("#img");
+					$img.setAttribute("src", event.target.result);
+					$img.setAttribute("style", "max-width:120px; max-height:130px;");
+				};
+				reader.readAsDataURL(event.target.files[0]);
+			}
+		}
+
+		function checkValue() {
+			var form = document.userInfo;
+			if (!form.memberId.value) {
+				alert("아이디를 입력하세요.");
+				return false;
+			}
+			if (form.idDuplication.value != "idCheck") {
+				alert("아이디 중복확인을 해주세요.")
+				return false;
+			}
+			if (!form.memberPwd.value) {
+				alert("비밀번호를 입력하세요.");
+				return false;
+			}
+			if (form.memberPwd.value.length < 6 || form.memberPwd.value.length > 12) {
+				alert("비밀번호는 6~12자리로 입력하세요");
+				return false;
+			}
+			if (form.memberPwd.value != form.pwdTest.value) {
+				alert("비밀번호를 동일하게 입력하세요.");
+				return false;
+			}
+			if (!form.nickname.value) {
+				alert("닉네임을 입력하세요.");
+				return false;
+			}
+			if (form.nickname.value.length > 10) {
+				alert("닉네임은 10자 이내로 작성해주세요.");
+				return false;
+			}
+			if (!form.memberName.value) {
+				alert("이름을 입력하세요.");
+				return false;
+			}
+			if (!form.birthDate.value) {
+				alert("생년월일을 입력하세요.");
+				return false;
+			}
+			const today = new Date();
+			const birthDate = new Date(form.birthDate.value);
+			let age = today.getFullYear() - birthDate.getFullYear();
+			const m = today.getMonth() - birthDate.getMonth();
+			if (m < 0 || (m == 0 && today.getDate() < birthDate.getDate())) {
+				age--;
+			}
+			if (age < 14) {
+				alert("만 14세 미만은 회원가입이 불가합니다.");
+				return false;
+			}
+			if (!form.gender.value) {
+				alert("성별을 선택하세요.");
+				return false;
+			}
+			if (!form.phone.value) {
+				alert("핸드폰 번호를 입력하세요.");
+				return false;
+			}
+			var phoneRegExp = /^\d{3}-\d{4}-\d{4}$/;
+			if (!phoneRegExp.test(form.phone.value) || form.phone.value.substr(0, 3) != "010") {
+				alert("핸드폰 번호는 '010-1234-5678'형식으로 입력하세요.");
+				return false;
+			}
+			if (!form.email.value) {
+				alert("이메일 주소를 입력하세요.");
+				return false;
+			}
+			if (form.emailDuplication.value != "emailCheck") {
+				alert("이메일주소 중복확인을 해주세요.")
+				return false;
+			}
+			if (!form.fileName.value) {
+				alert("프로필 사진 등록은 필수입니다.");
+				return false;
+			}
+			if (!form.answer.value) {
+				alert("본인확인을 위한 답변을 입력하세요.");
+				return false;
+			}
+			if (!form.answer.value) {
+				alert("본인확인 질문에 대한 답변을 입력하세요.");
+				return false;
+			}
+			if (!form.answer.value) {
+				alert("본인확인을 위한 답변을 입력하세요.");
+				return false;
+			}
+			if ($("#check1").is(":checked") == false) {
+				alert("서비스 약관에 동의해주세요.");
+				return false;
+			}
+			if ($("#check2").is(":checked") == false) {
+				alert("개인정보 수집을 위한 약관에 동의해주세요.");
+				return false;
+			}
+			form.action = "/member/register"
+			form.method = 'post';
+			form.submit();
+		}
+
+		function selectCategory() {
+			$.ajax({
+				url: "/member/category",
+				method: "get",
+				success: function (data) {
+					const $categoryCode = document.querySelector("#category");
+
+					for (let index in data) {
+						$option = document.createElement("option");
+						$option.value = data[index].categoryCode;
+						$option.textContent = data[index].categoryName;
+
+						$categoryCode.appendChild($option);
+					}
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			});
+		}
+
+		selectCategory();
+
+		$("#idCheck").click(function () {
+			var form = document.userInfo;
+			$.ajax({
+				url: "idCheck",
+				method: "get",
+				data: {
+					memberId: memberId.value
+				},
+				success: function (data) {
+					console.log(data.memberId == null);
+					if (data.memberId != null) {
+						alert("이미 사용중인 아이디입니다.");
+						return false;
+					} else {
+						alert("사용 가능한 아이디입니다.");
+						form.idDuplication.value = "idCheck";
+					}
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			});
+		});
+
+		$("#emailCheck").click(function () {
+			var form = document.userInfo;
+
+			$.ajax({
+				url: "emailCheck",
+				method: "get",
+				data: {
+					email: email.value
+				},
+				success: function (data) {
+					console.log(data.memberId == null);
+					if (data.email != null) {
+						alert("이미 사용중인 이메일입니다.");
+						return false;
+					} else {
+						alert("사용 가능한 이메일입니다.");
+						form.emailDuplication.value = "emailCheck";
+					}
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			});
+		});
+
+		function inputIdChk() {
+			document.userInfo.idDuplication.value = "idUncheck";
+		}
+
+		function inputEmailChk() {
+			document.userInfo.emailDuplication.value = "emailUncheck";
+		}
+
+		$("#checkAll").click(function () {
+
+			$("input:checkbox[id='check1']").prop("checked", true);
+			$("input:checkbox[id='check2']").prop("checked", true);
+		})
+
+	</script>
+
+	<div th:include="common/footer.html"></div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<form id="reply" method="get">
+		<!-- <input type="hidden" th:value="${ reply?.postCode }" name="postCode"> -->
+		<!-- <input type="hidden" th:value="${ reply?.replyCode }" name="replyCode">  
+		<input type="hidden" th:value="${ reply?.memberCode }" name="memberCode">  
+		<input type="hidden" th:value="${ reply?.reply }" name="reply">  
+		<input type="hidden" th:value="${ reply?.replyTime }" name="replyTime">   -->
+			<tr th:each="reply : ${ replyList }">
+				<td>	
+				    <td>작성자코드</td>
+					<td name="memberCode" th:text="${ reply?.memberCode }"></td>
+				</td> 
+				<br>
+				
+				<td>	
+				    <td>댓글내용</td>	
+					<td name="reply" th:text="${ reply?.reply }"></td>
+				</td>
+				<br>
+				
+				<td>	
+				    <td>작성시간</td>	
+					<td name="replyTime" th:text="${ reply?.replyTime }"></td>
+				</td>
+				<br>
+			</tr>
+	</form>
+</body>
+</html>

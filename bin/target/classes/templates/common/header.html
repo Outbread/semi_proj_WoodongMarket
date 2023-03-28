@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/header.css">
+</head>
+<body>
+   <div id="firstLine"> 
+      <div id="LogoWrap">
+            <img class="logo" src="/images/street.png" onclick="location.href='/main'">
+            <div id="nameWrap">
+                <div id="nameExplain" onclick="location.href='/main'">
+                    우리동네마켓
+                </div>
+            <div id="name" onclick="location.href='/main'">
+               우동마켓
+            </div>
+         </div>
+        </div>
+        
+   <div id="NavWrap">
+      <div id="searchBox">
+         <form id="loginForm" action="/post/search" method="get" >
+            <select align="left" th:with="searchCondition = ${selectCriteria?.searchCondition}"
+                  id="searchCondition" name="searchCondition">
+               <option value="productName" th:selected="${ searchCondition } == 'productName'">상품이름</option>
+             </select> 
+            <input type="hidden" name="currentPage" value="1">
+            <input type="search" id="inputBox" name="searchValue" placeholder="물품을 검색해보세요" th:value="${selectCriteria?.searchValue}">
+            <button id="btn" type="submit"><img src="/images/right-arrow.png" id="searchLogo"></button>
+         </form>
+
+      </div>
+   </div>
+        <div id="infoWrap">
+        		<th:block sec:authorize="hasRole('ADMIN')">
+                	<button id="button" onclick="location.href='/admin/adminpage'" style="height: 45px;">관리자 페이지</button>
+        		</th:block>
+        		<th:block sec:authorize="isAnonymous()">
+                	<button id="button" onclick="location.href='/member/login'">로그인</button>
+                	<img id="user" src="/images/user.png" onclick="alert('로그인 후 이용하실 수 있습니다.')"/>
+                	<img id="heart" src="/images/plus.png" onclick="alert('로그인 후 이용하실 수 있습니다.')"/>
+        		</th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                	<button id="button" onclick="location.href='/member/logout'">로그아웃</button>
+                	<img id="user" src="/images/user.png" onclick="location.href='/member/mypage'"/>
+                	<img id="heart" src="/images/plus.png" onclick="location.href='/post/regist'"/>
+        		</th:block>
+        </div>
+   </div>
+   <div id="secondLine">
+        <div id="cateWrap">
+            <div class="category" onclick="location.href='/category/clothes'">의류</div>
+            <div class="category" onclick="location.href='/category/it'">전자기기</div>
+            <div class="category" onclick="location.href='/category/culture'">문화</div>
+            <div class="category" onclick="location.href='/category/beauty'">미용잡화</div>
+            <div class="category" onclick="location.href='/category/furniture'">가구</div>
+        </div>
+   </div>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/mypage.css">
+</head>
+<body>
+   <div th:include="common/header.html"></div>
+
+	<h1 align="center" id="top"><span th:text="${#authentication.principal.memberName}" id="loginedName"></span>님 개인 페이지</h1>
+
+	<form action="/member/mypage" method="post" id="box">
+		<table align="center" id="table">
+			<tr>
+				<h3 id="letter">개인정보 변경</h3>
+			</tr>
+			<tr>
+				<td rowspan="9">
+					<img th:src="'/profilePic/' + ${#authentication.principal.profile}" id="profile"></img>
+				</td>
+				<input type="hidden" name="memberId" th:value="${#authentication.principal.memberId}">
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" name="memberName" th:value="${#authentication.principal.memberName}" disabled></td>
+			</tr>
+			<tr>
+				<td>닉네임</td>
+				<td><input type="text" name="Nickname" th:value="${#authentication.principal.nickName}"></td>
+			</tr>
+			<tr>
+				<td>핸드폰번호</td>
+				<td><input type="tel" name="Phone" th:value="${#authentication.principal.Phone}"></td>
+			<tr>
+				<td>본인확인질문</td>
+				<td>
+					<select name="Question">
+						<option th:text="${#authentication.principal.Question}" default></option>
+						<option value="none" disabled>==== 선택 ====</option>
+						<option value="당신의 보물1호는?">당신의 보물1호는?</option>
+						<option value="제일 좋아하는 음식은?">제일 좋아하는 음식은?</option>
+						<option value="나의 첫 반려동물 이름은?">나의 첫 반려동물 이름은?</option>
+						<option value="가장 존경하는 위인은?">가장 존경하는 위인은?</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>본인확인답변</td>
+				<td><input type="text" name="Answer" th:value="${#authentication.principal.Answer}"></td>
+			</tr>
+			<tr>
+				<td>이메일주소</td>
+				<td><input type="email" name="Email" th:value="${#authentication.principal.Email}"></td>
+			</tr>
+			<tr>
+				<td>지역</td>
+				<td>
+					<select name="Location">
+						<option th:text="${#authentication.principal.Location}"></option>
+						<option value="none" disabled>==== 선택 ====</option>
+						<option value="목동">목동</option>
+						<option value="신월동">신월동</option>
+						<option value="신정동">신정동</option>
+					</select>
+				</td>
+				<tr>
+					<td>관심카테고리</td>
+					<td>
+						<select name="favCategory">
+							<th:block th:switch="${#authentication.principal.favCategory}">
+						        <option th:case="1" value="1">의류</span>
+						        <option th:case="2" value="2">전자기기</span>
+						        <option th:case="3" value="3">문화</span>
+						        <option th:case="4" value="4">미용잡화</span>
+						        <option th:case="5" value="5">가구</span>
+			    			</th:block>
+							<option value="none" disabled>==== 선택 ====</option>
+							<option value="1">의류</option>
+							<option value="2">전자기기</option>
+							<option value="3">문화</option>
+							<option value="4">미용잡화</option>
+							<option value="5">가구</option>
+						</select>
+					</td>
+				</tr>
+			</tr>
+		</table>
+	
+			<tr><h4 id="caution">*--- 개인정보 변경 시 로그아웃됩니다. ---*</h4></tr>
+		<br>
+		<tr>
+			<td><button id="check" onclick="changeInfo()">변경</button><td>
+			<td><button id="check" onclick="cancel()" type="reset">취소</button></td>
+		</tr>
+		</form>
+		
+		<form action="/member/changePwd" method="get" id="change">
+				<tr>
+					<td><button onclick="location.href='/member/changePwd'" id="pwdBtn">비밀번호 변경</button></td>
+				</tr>
+		</form>
+		
+		<button id="sellListBtn" onclick="location.href='/member/sellList'"><span th:text="${#authentication.principal.memberName}"></span>님 판매 목록</button>
+	
+		<form action="/trade/list" id="tradeList">
+	         <button id="tradeBtn">교환요청</button>
+    	</form>
+    
+    	<form action="/trade/sendlist" id="tradeSendList">
+        	 <button id="sendBtn">받은요청</button>
+	    </form>
+=======
+   <h1 align="center"><span th:text="${#authentication.principal.memberName}"></span>님 개인 페이지</h1>
+
+>>>>>>> origin/master
+   <form action="/member/mypage" method="post" id="box">
+      <table align="center" id="table">
+         <tr>
+            <h3 id="letter">개인정보 변경</h3>
+         </tr>
+         <tr>
+            <td rowspan="9">
+               <img th:src="'/profilePic/' + ${#authentication.principal.profile}" id="profile"></img>
+            </td>
+            <input type="hidden" name="memberId" th:value="${#authentication.principal.memberId}">
+         </tr>
+         <tr>
+            <td>이름</td>
+            <td><input type="text" name="memberName" th:value="${#authentication.principal.memberName}" disabled></td>
+         </tr>
+         <tr>
+            <td>닉네임</td>
+            <td><input type="text" name="Nickname" th:value="${#authentication.principal.nickName}"></td>
+         </tr>
+         <tr>
+            <td>핸드폰번호</td>
+            <td><input type="tel" name="Phone" th:value="${#authentication.principal.Phone}"></td>
+         <tr>
+            <td>본인확인질문</td>
+            <td>
+               <select name="Question">
+                  <option th:text="${#authentication.principal.Question}" default></option>
+                  <option value="none" disabled>==== 선택 ====</option>
+                  <option value="당신의 보물1호는?">당신의 보물1호는?</option>
+                  <option value="제일 좋아하는 음식은?">제일 좋아하는 음식은?</option>
+                  <option value="나의 첫 반려동물 이름은?">나의 첫 반려동물 이름은?</option>
+                  <option value="가장 존경하는 위인은?">가장 존경하는 위인은?</option>
+               </select>
+            </td>
+         </tr>
+         <tr>
+            <td>본인확인답변</td>
+            <td><input type="text" name="Answer" th:value="${#authentication.principal.Answer}"></td>
+         </tr>
+         <tr>
+            <td>이메일주소</td>
+            <td><input type="email" name="Email" th:value="${#authentication.principal.Email}"></td>
+         </tr>
+         <tr>
+            <td>지역</td>
+            <td>
+               <select name="Location">
+                  <option th:text="${#authentication.principal.Location}"></option>
+                  <option value="none" disabled>==== 선택 ====</option>
+                  <option value="목동">목동</option>
+                  <option value="신월동">신월동</option>
+                  <option value="신정동">신정동</option>
+               </select>
+            </td>
+            <tr>
+               <td>관심카테고리</td>
+               <td>
+                  <select name="favCategory">
+                     <th:block th:switch="${#authentication.principal.favCategory}">
+                          <option th:case="1" value="1">의류</span>
+                          <option th:case="2" value="2">전자기기</span>
+                          <option th:case="3" value="3">문화</span>
+                          <option th:case="4" value="4">미용잡화</span>
+                          <option th:case="5" value="5">가구</span>
+                      </th:block>
+                     <option value="none" disabled>==== 선택 ====</option>
+                     <option value="1">의류</option>
+                     <option value="2">전자기기</option>
+                     <option value="3">문화</option>
+                     <option value="4">미용잡화</option>
+                     <option value="5">가구</option>
+                  </select>
+               </td>
+            </tr>
+         </tr>
+      </table>
+   
+         <tr><h4 id="caution">*--- 개인정보 변경 시 로그아웃됩니다. ---*</h4></tr>
+      <br>
+      <tr>
+         <td><button id="check" onclick="changeInfo()">변경</button><td>
+         <td><button id="check" onclick="cancel()" type="reset">취소</button></td>
+      </tr>
+      </form>
+      
+      <form action="/member/changePwd" method="get">
+            <tr>
+               <td><button onclick="location.href='/member/changePwd'" id="button">비밀번호 변경</button></td>
+            </tr>
+      </form>
+      <div id="bottomBtn">
+         <button id="sellListbtn" onclick="location.href='/member/sellList'"><span th:text="${#authentication.principal.memberName}"></span>님 판매 목록</button>
+   
+         <form action="/trade/list" id="tradeList">
+               <button>교환요청</button>
+          </form>
+    
+          <form action="/trade/sendlist" id="tradeSendList">
+               <button>받은요청</button>
+          </form>
+      </div>
+  
+<div th:include="common/footer.html"></div>
+
+<script>
+    function changeInfo() {
+        alert('변경이 완료되었습니다. 다시 로그인해주시길 바랍니다.')
+    }
+</script>
+</body>
+</html>

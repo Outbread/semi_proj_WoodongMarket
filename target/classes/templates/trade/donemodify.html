@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
+	#headName{
+		font-family: 'Cafe24Ssurround';
+		font-weight: bolder;
+		color: #FF6B3D;
+		font-size: 25px;
+		margin-top: 60px;
+		margin-bottom: 40px;
+	}
+
+	#wrapbody{
+		width: 405px;
+		margin : auto;
+		height: 100%;
+		align-items: center;
+	}
+	#form{
+		align-items: center;
+		margin:auto;
+	}
+	
+	#titlebox {
+		font-family: 'Cafe24SsurroundAir';margin : auto;
+		margin-top: 10px;
+		margin-bottom: 2px;
+		font-size: 16px;
+		text-align: left;
+		border: 2px solid #FF6B3D;
+		width: 360px;
+		border-radius: 7px;
+		
+		padding: 5px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	#textarea {
+		margin : auto;
+		font-family: 'Cafe24SsurroundAir';
+		font-size: 16px;
+		height: 230px;
+		margin-top: 20px;
+		border: 2px solid #FF6B3D;
+		width: 360px;
+		border-radius: 10px;
+		padding: 5px;
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-top: 17px;
+		resize: none;
+		line-height: 26px;
+	}
+	
+</style>
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	<h3 id="headName" align="center">교환신청글</h3>
+	<div id="wrapbody">
+		<form id="form" th:action= "@{'/trade/donemodify/' + ${trCode}}" method="post">
+			
+    			<input id="titlebox" type="text" name="trTitle" th:value="${ trade?.trTitle }" readonly="true"><br>
+        		<textarea id="textarea" name="trContent" th:text="${ trade?.trContent }" readonly="true" ></textarea><br>
+        	
+		</form>
+	</div>
+	<div th:include="common/footer.html"></div>
+</body>
+</html>

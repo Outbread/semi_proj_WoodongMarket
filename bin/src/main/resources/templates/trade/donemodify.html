@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div th:replace="common/header.html"></div>
+	<h3 align="center">내가 신청한 교환</h3>
+	<table align="center">
+      <tr>
+      	 <th>신청상품<th>
+      	 <td th:text="${ trO?.postCode?.productName }" ></td>
+         <td><button onclick="goDetailFunction()">상품보러가기</button></td>
+      </tr>
+      <tr>
+         <th>상품 이미지 등록</th>
+         <td th:text="${ trPic?.orginalName}" ></td>
+      </tr>
+      <tr>
+         <th>제목</th>
+         <td th:text="${ trPic?.trCode?.trTitle }" ></td>
+      </tr>
+      <tr>
+         <th>상품설명</th>
+         <td th:text="${trPic?.trCode?.trContent }" style="height:250px; width:500px;"></td>
+      </tr>
+	</table>
+	<div th:include="common/footer.html"></div>
+	
+	<script>
+		const successMessage = "[[${ modifySuccessMessage }]]";
+		successMessage && alert(successMessage);
+	</script>
+</body>
+<script th:inline="javascript">
+	let goDetailFunction = () => { 
+		location.href='/post/[[${trPic?.trCode?.postCode}]]';
+	}
+</script>
+</html>

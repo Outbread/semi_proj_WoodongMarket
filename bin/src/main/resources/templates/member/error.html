@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:include="common/header.html"></div>
+	<h1>에러페이지</h1>
+	<img src="/images/error1.png" style="width:100px">
+	<img src="/images/error2.png" style="width:100px">
+	<img src="/images/error3.png" style="width:100px">
+	<h4>
+		<span th:text="${exception}" style="color:red"></span>
+		발생!!
+	</h4>
+	<p>
+		발생 클래스: 
+		<span th:text="${exception.getClass()}"></span><br>
+
+		발생 클래스의 심플 네임:
+		<span th:text="${exception.getClass().getSimpleName()}"></span><br>
+
+		내가 설정한 에러 메시지: 
+		<span th:text="${exceptionMessage}"></span>
+	</p>
+	<div th:include="common/footer.html"></div>
+</body>
+</html>
